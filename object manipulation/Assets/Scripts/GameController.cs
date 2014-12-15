@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 public class GameController : MonoBehaviour {
 	public static GameController _singleton;
@@ -31,11 +32,17 @@ public class GameController : MonoBehaviour {
 	    headCursor = GameObject.Find("OVRPlayerController/OVRCameraRig/CenterEyeAnchor")
 			                   .GetComponent<HeadCursor>();
 		objectMoveController = GetComponent<ObjectMovementController> ();
-		dataPath = Application.persistentDataPath + "/objectTransforms.dat";
+		dataPath = Application.persistentDataPath + "/TransformsForScene" + Application.loadedLevelName + ".dat";
+		objectsToSave = new List<GameObjectTransformData> ();
+		Load ();
 	}
 
 	void Update(){
 		ListenForInputModeChange ();
+	}
+
+	void OnApplicationQuit(){
+		Save ();
 	}
 
 	void Save(){
@@ -47,21 +54,23 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Load(){
-		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Open (dataPath, FileMode.Create);
-		saveMe = (GameObjectTransformData[]) bf.Deserialize (file);
-		objectsToSave = new List<GameObjectTransformData> ();
-		// Instantiate each saved object
-		for (int i=0; i<saveMe.Length; i++){
-			GameObjectTransformData data = saveMe[i];
-			objectsToSave.Add(data); // Make sure we save this for next time, too
-			GameObject obj = Instantiate(Resources.Load ("Prefabs/" + data.getName(), typeof(GameObject)),
-			                             data.getPosition(),
-			                             data.getRotation());
-			obj.name = data.getName(); // To avoid unwanted "(Clone)" appended to name of objects.
-			obj.transform.localScale = data.getScale();
+		if (File.Exists(dataPath)){
+			BinaryFormatter bf = new BinaryFormatter ();
+			FileStream file = File.Open (dataPath, FileMode.Open);
+			saveMe = (GameObjectTransformData[]) bf.Deserialize (file);
+			
+			// Instantiate each saved object
+			for (int i=0; i<saveMe.Length; i++){
+				GameObjectTransformData data = saveMe[i];
+				GameObject obj = (GameObject) Instantiate(Resources.Load ("Prefabs/" + data.getName(), typeof(GameObject)),
+				                                          data.getPosition(),
+				                                          data.getRotation());
+				obj.name = data.getName(); // To avoid unwanted "(Clone)" appended to name of objects.
+				obj.transform.localScale = data.getScale();
+				data = new GameObjectTransformData(obj); // get a new instanceID to ensure it's unique for this playthrough
+				objectsToSave.Add(data); // Make sure we save this for next time, too
+			}
 		}
-
 	}
 
 	void ListenForInputModeChange ()
