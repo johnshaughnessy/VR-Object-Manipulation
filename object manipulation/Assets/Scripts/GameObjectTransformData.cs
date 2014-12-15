@@ -23,6 +23,8 @@ public class GameObjectTransformData
 
 	public GameObjectTransformData(GameObject obj){
 		name = obj.name;
+		instanceID = obj.GetInstanceID ();
+
 		positionX = obj.transform.position.x;
 		positionY = obj.transform.position.y;
 		positionZ = obj.transform.position.z;

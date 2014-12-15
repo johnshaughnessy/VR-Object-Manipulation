@@ -6,6 +6,9 @@ public class GameController : MonoBehaviour {
 	ObjectMovementController objectMoveController;
 	HeadCursor headCursor;
 
+	enum inputModes {PLAYER, OBJECT};
+	inputModes inputMode;
+
 	void Awake(){
 	    if (_singleton == null) {
 			DontDestroyOnLoad(gameObject);
@@ -13,6 +16,7 @@ public class GameController : MonoBehaviour {
 		} else if (_singleton != this){
 			Destroy(this);
 		}
+		inputMode = inputModes.PLAYER;
 	}
 
 	void Start(){
@@ -21,7 +25,34 @@ public class GameController : MonoBehaviour {
 		objectMoveController = GetComponent<ObjectMovementController> ();
 	}
 
+	void Update(){
+		ListenForInputModeChange ();
+	}
 
+	void ListenForInputModeChange ()
+	{
+		if (Input.GetButtonDown ("RStickPress")) {
+		    if (inputMode == inputModes.PLAYER){
+				SwitchToObjectInputMode();
+			} else if (inputModes == inputModes.OBJECT){
+			}
+		}
+	}
 
+	void SwitchToObjectInputMode ()
+	{
+		GameObject target = headCursor.GetTargetObject ();
+		if (target != null){
+			objectMoveController.target = target;
+			objectMoveController.isSelected = true;
+			SetPlayerMovementEnabled(false);
+		}
+	}
+
+	void SetPlayerMovementEnabled(bool b){
+		GameObject.Find ("OVRPlayerController")
+			      .GetComponent<OVRPlayerController> ()
+				  .enabled = b;
+	}
 
 }
