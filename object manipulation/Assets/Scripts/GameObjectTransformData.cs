@@ -42,7 +42,7 @@ public class GameObjectTransformData
 		return name;
 	}
 
-	public string getInstanceID(){
+	public int getInstanceID(){
 		return instanceID;
 	}
 
