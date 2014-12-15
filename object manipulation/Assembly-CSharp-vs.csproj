@@ -62,8 +62,7 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRUGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRVisionGuide.cs" />
-     <Compile Include="Assets\Script\GameControl.cs" />
-     <Compile Include="Assets\Scripts\GameControl.cs" />
+     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameObjectTransformData.cs" />
      <Compile Include="Assets\Scripts\HeadCursor.cs" />
      <Compile Include="Assets\Scripts\ObjectMovementController.cs" />

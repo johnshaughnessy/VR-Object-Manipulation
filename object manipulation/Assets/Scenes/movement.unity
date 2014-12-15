@@ -806,7 +806,7 @@ GameObject:
   - 114: {fileID: 495645330}
   - 114: {fileID: 495645328}
   m_Layer: 0
-  m_Name: GameControl
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
