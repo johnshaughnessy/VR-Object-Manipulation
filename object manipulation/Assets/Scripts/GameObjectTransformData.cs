@@ -6,7 +6,7 @@ using System;
 public class GameObjectTransformData
 {
 	string name;
-	string instanceID;
+	int instanceID;
 
 	float positionX;
 	float positionY;
@@ -40,6 +40,10 @@ public class GameObjectTransformData
 
 	public string getName(){
 		return name;
+	}
+
+	public string getInstanceID(){
+		return instanceID;
 	}
 
 	public Vector3 getPosition(){
