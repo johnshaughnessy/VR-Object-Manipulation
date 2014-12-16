@@ -26,10 +26,13 @@ public class SceneSerializer : MonoBehaviour {
 	void Start()
 	{
 		objectsToSave = new List<GameObjectTransformData> ();
-		SetDataPath(Application.persistentDataPath 
-		            + "/TransformsForScene" 
-		            + Application.loadedLevelName 
-		            + ".dat");
+		dataPath = Application.persistentDataPath 
+		                      + "/TransformsForScene" 
+		                      + Application.loadedLevelName 
+		                      + ".dat";
+		string persistantDataMessage = "Changes you make to the scene will persist even after you restart the application!\n" +
+						"To erase changes you made, turn off the application, delete " + dataPath + " and try again.";
+		Debug.Log (persistantDataMessage);
 		Load ();
 	}
 
