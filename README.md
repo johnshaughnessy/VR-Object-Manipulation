@@ -28,7 +28,7 @@ Object mode:
 
 Code Overview
 =============
-The GameController object is the most significant object in the app. Open the GameCotnroller script to see how button presses are fed to the appropriate classes depending on which input mode is active. (Note: This class got a bit messier than I like as mentioned in the TODO's but, I only had 15 hours so I did the best I could.)
+The GameController object is the most significant object in the app. Open the GameController script to see how button presses are fed to the appropriate classes depending on which input mode is active. (Note: Given more time, I would separate collecting button presses in a different class. That way, the game controller wouldn't have to care where its input comes from, and I could more easily support mouse/keyboard input or leap motion input without having to change much. Since this wasn't a goal for this project, I collected button presses in the GameController.)
 
 The ObjectMovementController interfaces with the GameObject's transform to produce smooth movement, rotation, and scaling. Both movement and rotation are computed relative to the direction you face, so that (for instance) pushing up on the left joystick will always mean pushing an object forward from your perspective.
 
