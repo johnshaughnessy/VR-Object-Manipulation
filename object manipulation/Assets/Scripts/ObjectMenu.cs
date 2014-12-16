@@ -18,7 +18,7 @@ public class ObjectMenu : MonoBehaviour {
 			                            .GetComponent<MeshRenderer>();
 		// TODO: This should be done programatically because game objects could be pulled in from anywhere, 
 		//       and we already make the assumption that we save those objects as prefabs in Resources/Prefabs
-		prefabNames = new string[] {"Beut Tree", "Floor", "Fun Box"};
+		prefabNames = new string[] {"Beut Tree", "Fun Box"};
 		int index = 0;
 		menuItemSpawnLocation = transform.FindChild ("Menu Item Spawn Location").transform;
 	}

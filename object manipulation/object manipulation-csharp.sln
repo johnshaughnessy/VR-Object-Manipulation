@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{B1EAE6C7-4DBD-BF8A-C6B6-D23B8E8B2DEA}") = "object manipulation", "Assembly-CSharp-firstpass-vs.csproj", "{D3262F9E-8520-A803-2ACD-D1C42C5B1193}"
+EndProject
 Project("{B1EAE6C7-4DBD-BF8A-C6B6-D23B8E8B2DEA}") = "object manipulation", "Assembly-CSharp-vs.csproj", "{B9FD2ECF-3F4A-A139-85B9-441CF996348A}"
 EndProject
 Project("{B1EAE6C7-4DBD-BF8A-C6B6-D23B8E8B2DEA}") = "object manipulation", "Assembly-CSharp-Editor-vs.csproj", "{3CC43278-2696-F9FF-BE69-324A332D62BF}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3262F9E-8520-A803-2ACD-D1C42C5B1193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3262F9E-8520-A803-2ACD-D1C42C5B1193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3262F9E-8520-A803-2ACD-D1C42C5B1193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3262F9E-8520-A803-2ACD-D1C42C5B1193}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9FD2ECF-3F4A-A139-85B9-441CF996348A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9FD2ECF-3F4A-A139-85B9-441CF996348A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9FD2ECF-3F4A-A139-85B9-441CF996348A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +29,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																														GlobalSection(MonoDevelopProperties) = preSolution
+																																																																GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

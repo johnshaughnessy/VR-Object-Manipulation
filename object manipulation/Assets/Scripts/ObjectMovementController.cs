@@ -10,7 +10,7 @@ public class ObjectMovementController : MonoBehaviour {
 	Vector3 horizontal;
 	public bool isSelected = false;
 	float speed = 2.0f;
-	float snapDegrees = 15f;
+	float snapDegrees = 1.0f;
 	float deadzone = .5f; // Use deadzone to ensure player intentionally moved axes.
 
 	void Awake()
@@ -38,6 +38,7 @@ public class ObjectMovementController : MonoBehaviour {
 	/* Movement */
 	public void DoTranslation (float leftX, float leftY, float rightY)
 	{
+		Debug.Log (target.name);
 		if (target != null && isSelected) {
 			// Move speed is proportional to object size so that object placement is easier.
 			float moveCoefficient = Time.deltaTime * speed * Mathf.Sqrt(target.localScale.magnitude); 

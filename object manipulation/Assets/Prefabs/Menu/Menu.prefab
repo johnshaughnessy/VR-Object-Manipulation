@@ -23,6 +23,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 402302}
+  - 114: {fileID: 11405748}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -39,9 +40,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 402304}
   - 20: {fileID: 2002300}
-  - 124: {fileID: 12402300}
-  - 92: {fileID: 9202300}
-  - 81: {fileID: 8102300}
   m_Layer: 0
   m_Name: Menu Camera
   m_TagString: Untagged
@@ -86,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0211793184, y: 1.50075185, z: -23.2323971}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 402306}
@@ -101,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102304}
   m_LocalRotation: {x: 0, y: -.707105994, z: 0, w: .707107604}
-  m_LocalPosition: {x: 399.271179, y: 27.3692493, z: -5.25766373}
+  m_LocalPosition: {x: 426.899994, y: 27.3999996, z: -5.30000019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 402302}
@@ -126,8 +124,8 @@ Camera:
   m_GameObject: {fileID: 102304}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: .132352948, g: .132352948, b: .132352948, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -190,27 +188,19 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!81 &8102300
-AudioListener:
+--- !u!114 &11405748
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102304}
+  m_GameObject: {fileID: 102302}
   m_Enabled: 1
---- !u!92 &9202300
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102304}
-  m_Enabled: 1
---- !u!124 &12402300
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102304}
-  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5683ae129cac7974f8262722978f7853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpen: 0
+  menuItem: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

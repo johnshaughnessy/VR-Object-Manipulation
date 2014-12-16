@@ -23,7 +23,7 @@ public class GameObjectTransformData
 
 	public GameObjectTransformData(GameObject obj)
 	{
-		name = obj.name;
+		name = obj.transform.parent.name + "\\" + obj.name;
 		instanceID = obj.GetInstanceID ();
 
 		positionX = obj.transform.position.x;
