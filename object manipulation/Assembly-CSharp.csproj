@@ -62,12 +62,12 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRUGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRVisionGuide.cs" />
-     <Compile Include="Assets\SceneSerializer.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GameObjectTransformData.cs" />
      <Compile Include="Assets\Scripts\HeadCursor.cs" />
      <Compile Include="Assets\Scripts\ObjectMenu.cs" />
      <Compile Include="Assets\Scripts\ObjectMovementController.cs" />
+     <Compile Include="Assets\Scripts\SceneSerializer.cs" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\Plugins\x86_64\donotdelete.txt" />
      <None Include="Assets\OVR\Shaders\TextShader3D.shader" />

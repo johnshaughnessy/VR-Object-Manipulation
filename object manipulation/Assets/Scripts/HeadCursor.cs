@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//TODO: This class is simple now because
+//      This class is simple now because it doesn't manage drawing a cursor or anything.
+//TODO: Does this even need its own class?
 public class HeadCursor : MonoBehaviour {
 
 	public Transform GetTargetObjectTransform()

@@ -27,6 +27,7 @@ public class ObjectMenu : MonoBehaviour {
 
 	void OpenMenu()
 	{
+
 	}
 
 	void CloseMenu()
