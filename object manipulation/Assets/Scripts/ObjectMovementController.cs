@@ -10,7 +10,10 @@ public class ObjectMovementController : MonoBehaviour {
 	Vector3 horizontal;
 	public bool isSelected = false;
 	float speed = 2.0f;
-	float snapDegrees = 1.0f;
+	float snapDegrees = 1.0f; //TODO: Replace snapDegrees entirely.
+	                          //      Originally, I wanted incremental rotation, so snapDegrees was set at 
+	                          //      45, then 30, then 15. But now I prefer continous rotation, and I only 
+	                          //      "snap" to an incremental orientation when the leftJoystick is pressed in.
 	float deadzone = .5f; // Use deadzone to ensure player intentionally moved axes.
 
 	void Awake()
@@ -38,7 +41,6 @@ public class ObjectMovementController : MonoBehaviour {
 	/* Movement */
 	public void DoTranslation (float leftX, float leftY, float rightY)
 	{
-		Debug.Log (target.name);
 		if (target != null && isSelected) {
 			// Move speed is proportional to object size so that object placement is easier.
 			float moveCoefficient = Time.deltaTime * speed * Mathf.Sqrt(target.localScale.magnitude); 
@@ -71,7 +73,7 @@ public class ObjectMovementController : MonoBehaviour {
 			
 			/* Snap to multiples of incremental rotations */
 			if (snapRotation){
-				target.eulerAngles = RoundToSnapMultiple(target.eulerAngles, (int) snapDegrees);
+				target.eulerAngles = RoundToSnapMultiple(target.eulerAngles, (int) 15); //TODO: remove magic number
 			}
 		}
 

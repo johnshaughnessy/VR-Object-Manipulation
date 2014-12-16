@@ -51,11 +51,16 @@ public class GameController : MonoBehaviour {
 		float triggers = Input.GetAxis ("RT");
 		float LDPadHorizontal = Input.GetAxis ("LDPadHorizontal");
 		bool x = Input.GetButton ("X");
+		bool xDown = Input.GetButtonDown ("X");
 		bool b = Input.GetButton ("B");
+		bool bDown = Input.GetButtonDown ("B");
 		bool a = Input.GetButton ("A");
+		bool aDown = Input.GetButtonDown ("A");
 		bool y = Input.GetButton ("Y");
 		bool lb = Input.GetButton ("LB");
+		bool lbDown = Input.GetButtonDown ("LB");
 		bool rb = Input.GetButton ("RB");
+		bool rbDown = Input.GetButtonDown ("RB");
 		bool lStickPress = Input.GetButtonDown("LStickPress");
 		bool rStickPress = Input.GetButtonDown ("RStickPress");
 		bool start = Input.GetButtonDown ("Start");
@@ -85,10 +90,14 @@ public class GameController : MonoBehaviour {
 				ChangeInputMode(inputModes.OBJECT);
 			} else if (start) {
 				ChangeInputMode(inputModes.PLAYER);
-			} else if (rb){ 
+			} else if (bDown){ 
 				objectMenu.nextItem();
-			} else if (lb){
+			} else if (xDown){
 				objectMenu.previousItem();
+			} else if (rbDown) {
+				objectMenu.nextCategory();
+			} else if (lbDown) {
+				objectMenu.previousCategory();
 			}
 		}
 

@@ -1,14 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ObjectMenu : MonoBehaviour {
 	public bool isOpen; // Menu will be displayed only if it is open.
-
-	string[] prefabNames;
-	int index;
 	public GameObject menuItem;
 	MeshRenderer menuDisplayRenderer;
 	Transform menuItemSpawnLocation;
+
+	// Each category (GameObject) is mapped to a list of prefabs that fit into that category.
+	// These categories are wrapped in a list, so that we can iterate over them as well.
+	List<KeyValuePair<GameObject, List<string>>> prefabs;
+	int categoryIndex;
+	int prefabIndex;
+	/* For clarity, the prefabs list looks like this:
+	 *  {
+	 *     {Beds(GameObject) : {bed1(string), bed2, bed3} },
+	 *     {Tables(GameObject) : {table1, table2, table3, table4} },
+	 *     {etc...}
+	 *  }
+	 */
 
 	// Use this for initialization
 	void Start () 
@@ -16,11 +27,25 @@ public class ObjectMenu : MonoBehaviour {
 		isOpen = false;
 		menuDisplayRenderer = GameObject.Find ("OVRPlayerController/Menu Display")
 			                            .GetComponent<MeshRenderer>();
-		// TODO: This should be done programatically because game objects could be pulled in from anywhere, 
-		//       and we already make the assumption that we save those objects as prefabs in Resources/Prefabs
-		prefabNames = new string[] {"Beut Tree", "Fun Box"};
-		int index = 0;
 		menuItemSpawnLocation = transform.FindChild ("Menu Item Spawn Location").transform;
+		GetPrefabNamesAndCategories ();
+
+	}
+
+	void GetPrefabNamesAndCategories(){
+		prefabs = new List<KeyValuePair<GameObject, List<string>>> ();
+		Transform root = GameObject.Find ("Furniture").transform;
+		for (int i=0; i<root.childCount; i++){
+			Transform category = root.GetChild(i);
+			List<string> prefabsInThisCategory = new List<string>();
+			for (int j=0; j<category.childCount; j++){
+				prefabsInThisCategory.Add(category.GetChild(j).name);
+			}
+			prefabs.Add (new KeyValuePair<GameObject, List<string>>(category.gameObject, prefabsInThisCategory));
+		}
+		// Start browsing at the "beginning" by setting indices to 0.
+		categoryIndex = 0;
+		prefabIndex = 0;
 	}
 	
 
@@ -34,10 +59,21 @@ public class ObjectMenu : MonoBehaviour {
 
 	public void OpenMenu()
 	{
-		menuItem = (GameObject) Instantiate (Resources.Load ("Prefabs/" + prefabNames[index]),
+
+		string prefabPath = prefabs [categoryIndex].Key.name + "/" + prefabs [categoryIndex].Value [prefabIndex];
+		Debug.Log ("ObjectMenu: prefabPath is " + prefabPath);
+		menuItem = (GameObject) Instantiate (Resources.Load ("Prefabs/" + prefabPath),
 		                                     menuItemSpawnLocation.position,
 		                                     menuItemSpawnLocation.rotation);
-		menuItem.name = prefabNames [index];
+		menuItem.name = prefabs [categoryIndex].Value [prefabIndex];
+		menuItem.transform.parent = prefabs [categoryIndex].Key.transform;
+
+		// TODO: This is just a hack to fix a bug last minute. A better solution should be written.
+		menuItem.isStatic = false;
+		for (int i=0; i < menuItem.transform.childCount; i++) {
+			menuItem.transform.GetChild(i).gameObject.isStatic = false;
+		}
+
 		menuDisplayRenderer.enabled = true;
 		isOpen = true;
 	}
@@ -55,16 +91,36 @@ public class ObjectMenu : MonoBehaviour {
 	public void nextItem()
 	{
 		Destroy (menuItem);
-		index = (index + 1) % prefabNames.Length;
+		prefabIndex = (prefabIndex + 1) % prefabs[categoryIndex].Value.Count;
 		OpenMenu ();
 	}
 
 	public void previousItem()
 	{
 		Destroy (menuItem);
-		if (index == 0)
-			index = prefabNames.Length; // We don't want to go negative
-		index = (index - 1) % prefabNames.Length;
+		if (prefabIndex == 0){
+			prefabIndex = prefabs[categoryIndex].Value.Count;
+		}
+		prefabIndex = (prefabIndex -1) % prefabs[categoryIndex].Value.Count;
+		OpenMenu ();
+	}
+
+	public void nextCategory()
+	{
+		Destroy (menuItem);
+		prefabIndex = 0;
+		categoryIndex = (categoryIndex + 1) % prefabs.Count;
+		OpenMenu ();
+	}
+
+	public void previousCategory()
+	{
+		Destroy (menuItem);
+		prefabIndex = 0;
+		if (categoryIndex == -1){
+			categoryIndex = prefabs.Count; // don't overflow negative
+		}
+		categoryIndex = (categoryIndex -1) % prefabs.Count;
 		OpenMenu ();
 	}
 }
