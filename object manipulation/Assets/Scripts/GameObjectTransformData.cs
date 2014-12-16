@@ -21,7 +21,8 @@ public class GameObjectTransformData
 	float scaleY;
 	float scaleZ;
 
-	public GameObjectTransformData(GameObject obj){
+	public GameObjectTransformData(GameObject obj)
+	{
 		name = obj.name;
 		instanceID = obj.GetInstanceID ();
 
@@ -38,23 +39,28 @@ public class GameObjectTransformData
 		scaleZ = obj.transform.localScale.z;
 	}
 
-	public string getName(){
+	public string getName()
+	{
 		return name;
 	}
 
-	public int getInstanceID(){
+	public int getInstanceID()
+	{
 		return instanceID;
 	}
 
-	public Vector3 getPosition(){
+	public Vector3 getPosition()
+	{
 		return new Vector3(positionX, positionY, positionZ);
 	}
 
-	public Quaternion getRotation(){
+	public Quaternion getRotation()
+	{
 		return new Quaternion(rotationX, rotationY, rotationZ, rotationW);
 	}
 
-	public Vector3 getScale(){
+	public Vector3 getScale()
+	{
 		return new Vector3(scaleX, scaleY, scaleZ);
 	}
 

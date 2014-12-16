@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//TODO: This class is simple now because
 public class HeadCursor : MonoBehaviour {
 
-	public GameObject GetTargetObject(){
-		Vector3 forward = transform.forward;
+	public Transform GetTargetObjectTransform()
+	{
 		RaycastHit hit;
-		if (Physics.Raycast(transform.position, forward, out hit, 100.0f)){
-			return hit.transform.gameObject;
+		// TODO: Arbitrary raycast length of 200.0f
+		if (Physics.Raycast(transform.position, transform.forward, out hit, 200.0f)){ 
+			return hit.transform.gameObject.transform;
 		} 
 		return null;
 	}
