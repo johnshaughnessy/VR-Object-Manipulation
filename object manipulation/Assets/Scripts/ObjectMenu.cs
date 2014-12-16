@@ -59,7 +59,6 @@ public class ObjectMenu : MonoBehaviour {
 
 	public void OpenMenu()
 	{
-
 		string prefabPath = prefabs [categoryIndex].Key.name + "/" + prefabs [categoryIndex].Value [prefabIndex];
 		Debug.Log ("ObjectMenu: prefabPath is " + prefabPath);
 		menuItem = (GameObject) Instantiate (Resources.Load ("Prefabs/" + prefabPath),
@@ -117,7 +116,7 @@ public class ObjectMenu : MonoBehaviour {
 	{
 		Destroy (menuItem);
 		prefabIndex = 0;
-		if (categoryIndex == -1){
+		if (categoryIndex == 0){
 			categoryIndex = prefabs.Count; // don't overflow negative
 		}
 		categoryIndex = (categoryIndex -1) % prefabs.Count;
