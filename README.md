@@ -36,7 +36,7 @@ The ObjectMenu script provides the logic behind the Menu. The Menu GameObject is
 
 Back in the GameController object, the SceneSerializer is responsible for persisting your data through multiple runs of the application. An important Debug message should be logged to the console each time you run the app from the editor. This message explains how to delete your changes should you want to start over or should you encounter a bug. Serialization is not as straight forward for Unity as I'd like - for instance, you cannot simply mark a gameObject as serializable and call it a day. In order to save and load gameObject states, I serialized the transform components as well as the name, parent, and unique instanceID (to prevent duplicates and errors while loading) individually.
 
-I would be happy to answer any questions about the layout of my code or why I certain design decisions. I also invite (constructive) criticism as I'm always looking for ways to improve my skills and have had to learn Unity on my own so far (except of course for the thousands of people writing helpful guides and tips).
+I would be happy to answer any questions about the layout of my code or why I certain design decisions. I also invite criticism as I'm always looking for ways to improve my skills.
 
 
 Shortcomings / Where to go from here
