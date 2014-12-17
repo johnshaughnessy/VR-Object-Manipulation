@@ -119,10 +119,14 @@ public class GameController : MonoBehaviour {
 			} 
 		} else if (inputMode == inputModes.OBJECT){
 		    if (targetMode == inputModes.PLAYER){
-				sceneSerializer.PrepareTargetObjectForSave(objectMoveController.target.gameObject);
+				if (objectMoveController.target != null){
+					sceneSerializer.PrepareTargetObjectForSave(objectMoveController.target.gameObject);
+				}
 				SwitchToPlayerInputMode();
 			} else if (targetMode == inputModes.MENU){
-				sceneSerializer.PrepareTargetObjectForSave(objectMoveController.target.gameObject);
+				if (objectMoveController.target != null){
+					sceneSerializer.PrepareTargetObjectForSave(objectMoveController.target.gameObject);
+				}
 				objectMoveController.isSelected = false;
 				objectMenu.OpenMenu();
 			}

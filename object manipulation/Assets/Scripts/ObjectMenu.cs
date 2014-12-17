@@ -60,7 +60,6 @@ public class ObjectMenu : MonoBehaviour {
 	public void OpenMenu()
 	{
 		string prefabPath = prefabs [categoryIndex].Key.name + "/" + prefabs [categoryIndex].Value [prefabIndex];
-		Debug.Log ("ObjectMenu: prefabPath is " + prefabPath);
 		menuItem = (GameObject) Instantiate (Resources.Load ("Prefabs/" + prefabPath),
 		                                     menuItemSpawnLocation.position,
 		                                     menuItemSpawnLocation.rotation);

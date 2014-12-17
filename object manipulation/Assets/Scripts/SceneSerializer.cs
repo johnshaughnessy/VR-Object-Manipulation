@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 public class SceneSerializer : MonoBehaviour {
 	public static SceneSerializer _singleton;
@@ -75,13 +76,18 @@ public class SceneSerializer : MonoBehaviour {
 			// Instantiate each saved object
 			for (int i=0; i<saveMe.Length; i++){
 				GameObjectTransformData data = saveMe[i];
-				GameObject obj = (GameObject) Instantiate(Resources.Load ("Prefabs/" + data.getName(), typeof(GameObject)),
+			
+				try {
+					GameObject obj = (GameObject) Instantiate(Resources.Load ("Prefabs/" + data.getName(), typeof(GameObject)),
 				                                          data.getPosition(),
 				                                          data.getRotation());
-				obj.name = data.getName(); // To avoid unwanted "(Clone)" appended to name of objects.
-				obj.transform.localScale = data.getScale();
-				data = new GameObjectTransformData(obj); // get a new instanceID to ensure it's unique for this playthrough
-				objectsToSave.Add(data); // Make sure we save this for next time, too
+					obj.name = data.getName(); // To avoid unwanted "(Clone)" appended to name of objects.
+					obj.transform.localScale = data.getScale();
+					data = new GameObjectTransformData(obj); // get a new instanceID to ensure it's unique for this playthrough
+					objectsToSave.Add(data); // Make sure we save this for next time, too
+				} catch (ArgumentException){
+					Debug.LogWarning("Could not load prefab: " + data.getName ());
+			    }
 			}
 		}
 	}
