@@ -9,11 +9,9 @@ public class ObjectMovementController : MonoBehaviour {
 	Vector3 forward;
 	Vector3 horizontal;
 	public bool isSelected = false;
-	float speed = 2.0f;
-	float snapDegrees = 1.0f; //TODO: Replace snapDegrees entirely.
-	                          //      Originally, I wanted incremental rotation, so snapDegrees was set at 
-	                          //      45, then 30, then 15. But now I prefer continous rotation, and I only 
-	                          //      "snap" to an incremental orientation when the leftJoystick is pressed in.
+	float translationSpeed = 1.5f;
+	float rotationSpeed = 3.0f; 
+	int rotationSnapFactor = 15; // Snaps rotation to some multiple of this on button press
 	float deadzone = .5f; // Use deadzone to ensure player intentionally moved axes.
 
 	void Awake()
@@ -43,7 +41,7 @@ public class ObjectMovementController : MonoBehaviour {
 	{
 		if (target != null && isSelected) {
 			// Move speed is proportional to object size so that object placement is easier.
-			float moveCoefficient = Time.deltaTime * speed * Mathf.Sqrt(target.localScale.magnitude); 
+			float moveCoefficient = Time.deltaTime * translationSpeed * Mathf.Sqrt(target.localScale.magnitude); 
 			if (Mathf.Abs(leftX) > deadzone){
 				target.position += (-horizontal * leftX * moveCoefficient); 
 			}
@@ -64,16 +62,16 @@ public class ObjectMovementController : MonoBehaviour {
 	                        bool snapRotation = false)
 	{
 		if (target != null && isSelected) {
-			if (x) target.Rotate (target.InverseTransformDirection(Vector3.up * snapDegrees));
-			if (b) target.Rotate (target.InverseTransformDirection(Vector3.up * -snapDegrees));
-			if (a) target.Rotate (target.InverseTransformDirection(horizontal * snapDegrees));
-			if (y) target.Rotate (target.InverseTransformDirection(horizontal * -snapDegrees));
-			if (lb) target.Rotate (target.InverseTransformDirection(forward * snapDegrees));
-			if (rb) target.Rotate (target.InverseTransformDirection(forward * -snapDegrees));
+			if (x) target.Rotate (target.InverseTransformDirection(Vector3.up * rotationSpeed));
+			if (b) target.Rotate (target.InverseTransformDirection(Vector3.up * -rotationSpeed));
+			if (a) target.Rotate (target.InverseTransformDirection(horizontal * rotationSpeed));
+			if (y) target.Rotate (target.InverseTransformDirection(horizontal * -rotationSpeed));
+			if (lb) target.Rotate (target.InverseTransformDirection(forward * rotationSpeed));
+			if (rb) target.Rotate (target.InverseTransformDirection(forward * -rotationSpeed));
 			
 			/* Snap to multiples of incremental rotations */
 			if (snapRotation){
-				target.eulerAngles = RoundToSnapMultiple(target.eulerAngles, (int) 15); //TODO: remove magic number
+				target.eulerAngles = RoundToSnapMultiple(target.eulerAngles, rotationSnapFactor); 
 			}
 		}
 
